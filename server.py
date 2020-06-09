@@ -4,6 +4,9 @@ import mimetypes
 from http import HTTPStatus
 from typing import Dict
 
+HTTP_VERSION = '2.0'
+
+
 class TCPServer:
 
     def __init__(self, host='127.0.0.1', port=8888):
@@ -45,13 +48,13 @@ class TCPServer:
 
 class HTTPRequest:
     '''
-        Representation of an HTTP request
+        Representation of an HTTP request coming from client
     '''
 
     def __init__(self, data: bytes):
         self.method = None
         self.uri = None
-        self.http_version = '2.0'
+        self.http_version = HTTP_VERSION
         self.headers = {}
 
         # call self.parse method to parse the request data
@@ -77,7 +80,7 @@ class HTTPRequest:
 
 class HTTPResponse:
     '''
-        Representation of an HTTP response
+        Representation of an HTTP response returned by server
     '''
 
     BASE_HEADERS = {
@@ -90,7 +93,7 @@ class HTTPResponse:
         self,
         status_code: int,
         headers: Dict = {},
-        http_version: str = '2.0',
+        http_version: str = HTTP_VERSION,
         body: bytes = b''
     ):
 
